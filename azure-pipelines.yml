@@ -10,6 +10,7 @@ resources:
 
 variables:
   tag: '$(Build.BuildId)'
+  repoName: spring-boot
 
 stages:
 - stage: Build
@@ -37,14 +38,13 @@ stages:
         command: build
         dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
         repository: $(imageName)
-        tags: |
-          $(tag)
+        tags: '$(Build.BuildId)'
     - task: ECRPushImage@1
       inputs:
         awsCredentials: 'AWS-AZURE'
         regionName: 'us-east-1'
         imageSource: 'imageid'
-        sourceImageId: '$(imageName):$(tag)'
+        sourceImageId: '$(imageName):$(Build.BuildId)'
         repositoryName: '$(repoName)'
-        pushTag: '$(tag)'
+        pushTag: '$(Build.BuildId)'
         forceDockerNamingConventions: true

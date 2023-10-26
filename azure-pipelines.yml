@@ -46,5 +46,13 @@ stages:
         imageSource: 'imageid'
         sourceImageId: '$(imageName):$(Build.BuildId)'
         repositoryName: '$(repoName)'
-        pushTag: '$(Build.BuildId)'
-        forceDockerNamingConventions: true
+        pushTag: '- task: ECRPushImage@1
+  # inputs:
+  #   awsCredentials: 'AWS-AZURE'
+  #   regionName: 'us-east-1'
+  #   imageSource: 'imageid'
+  #   sourceImageId: '$(imageName):$(Build.BuildId)'
+  #   repositoryName: '$(repoName)'
+  #   pushTag: '$(Build.BuildId)'
+  #   forceDockerNamingConventions: true'
+  #       forceDockerNamingConventions: true

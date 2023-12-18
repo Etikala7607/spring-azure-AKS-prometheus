@@ -1,49 +1,55 @@
-# Docker
-# Build a Docker image
-# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
-
 trigger:
 - main
 
-resources:
-- repo: self
+pool:
+  vmImage: 'ubuntu-latest'
 
 variables:
-  tag: '$(Build.BuildId)'
+  acrUsername: 'sppringg'
+  acrPassword: 'e3/m6Lym5Ov/y5J4gGuHu3fwR63QKle2vJqP9TMGfw+ACRCRg7Gx'
+  acrRegistry: 'sppringg.azurecr.io'
+  dockerImageName: 'spring-boot'
 
 stages:
-- stage: Build
-  displayName: Build image
+- stage: BuildAndPush
   jobs:
-  - job: Build
-    displayName: Build
-    pool:
-      vmImage: ubuntu-latest
+  - job: BuildAndPush
     steps:
-    - task: Maven@4
+    - script: echo 'Starting Maven build and Docker push'
+      displayName: 'Starting Maven Build and Docker Push'
+
+    - task: UseJavaVersion@1
       inputs:
-        mavenPomFile: 'pom.xml'
-        goals: 'install'
-        publishJUnitResults: true
-        testResultsFiles: '**/surefire-reports/TEST-*.xml'
-        javaHomeOption: 'JDKVersion'
-        mavenVersionOption: 'Default'
-        mavenAuthenticateFeed: false
-        effectivePomSkip: false
-        sonarQubeRunAnalysis: false
-    - task: Docker@2
-      displayName: Build an image
+        versionSpec: '8'
+        addToPath: true
+
+    - task: UseMaven@3
       inputs:
-        command: build
-        dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
-        repository: $(imageName)
-        tags: '$(Build.BuildId)'
-    - task: ECRPushImage@1
+        mavenVersion: '3.9.3'
+
+    - script: |
+        # First Stage: Build Spring Boot Project with Maven
+        mvn clean package
+      displayName: 'Build Spring Boot Project'
+
+    - task: UseDotNet@2
       inputs:
-        awsCredentials: 'AWS-AZURE'
-        regionName: 'us-east-1'
-        imageSource: 'imageid'
-        sourceImageId: '$(imageName):$(Build.BuildId)'
-        repositoryName: '$(repoName)'
-        pushTag: '- task: ECRPushImage@1
-        forceDockerNamingConventions: true
+        version: '2.x'
+        packageType: 'sdk'
+
+    - script: |
+        # Second Stage: Build Docker Image
+        docker build -f Dockerfile -t $(dockerImageName):$(Build.BuildId) .
+      displayName: 'Build Docker Image'
+
+    - script: |
+        # Login to Docker Registry (ACR)
+        docker login -u $(acrUsername) -p $(acrPassword) $(acrRegistry)
+
+        # Push Docker Image to ACR
+        docker tag $(dockerImageName):$(Build.BuildId) $(acrRegistry)/$(dockerImageName):$(Build.BuildId)
+        docker push $(acrRegistry)/$(dockerImageName):$(Build.BuildId)
+      displayName: 'Push Docker Image to ACR'
+
+    - script: echo 'Maven build and Docker push completed successfully!'
+      displayName: 'Maven Build and Docker Push Complete'

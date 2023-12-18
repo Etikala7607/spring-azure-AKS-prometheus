@@ -18,10 +18,11 @@ stages:
     - script: echo 'Starting Maven build and Docker push'
       displayName: 'Starting Maven Build and Docker Push'
 
-    - task: Setup Java
+    - task: JavaToolInstaller@0
       inputs:
         versionSpec: '8'
         addToPath: true
+        jdkArchitectureOption: 'x64'
 
     - task: Maven@3
       inputs:

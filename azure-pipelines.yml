@@ -10,6 +10,7 @@ resources:
 
 variables:
   tag: '$(Build.BuildId)'
+  imageName: 'dockeravan/spg-boot'
 
 stages:
 - stage: Build

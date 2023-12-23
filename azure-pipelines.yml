@@ -44,6 +44,7 @@ stages:
       displayName: Push an image
       inputs:
         command: push
+        containerRegistry: 'Docker-Registry'
         repository: $(imageName)
         tags: |
           $(tag)

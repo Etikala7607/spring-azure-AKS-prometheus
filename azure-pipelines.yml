@@ -56,4 +56,4 @@ stages:
         azureResourceGroup: 'my_resource'
         kubernetesCluster: 'AKS-SPG-BOOT'
         namespace: 'new-spg'
-        manifests: 'deployment.yml'
+        manifests: 'springboot-app/manifests/deployment.yml'

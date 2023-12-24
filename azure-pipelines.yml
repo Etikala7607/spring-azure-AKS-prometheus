@@ -58,4 +58,4 @@ stages:
         namespace: 'new-spg'
         manifests: 'springboot-app/manifests/deployment.yml'
     - script: ls -R $(System.DefaultWorkingDirectory)
-  displayName: 'List Files in Working Directory'
+      displayName: 'List Files in Working Directory'

@@ -56,6 +56,4 @@ stages:
         azureResourceGroup: 'my_resource'
         kubernetesCluster: 'AKS-SPG-BOOT'
         namespace: 'new-spg'
-        manifests: 'springboot-app/manifests/deployment.yml'
-    - script: ls -R $(System.DefaultWorkingDirectory)
-      displayName: 'List Files in Working Directory'
+        manifests: 'k8s/deployment.yml'

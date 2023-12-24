@@ -52,7 +52,7 @@ stages:
       inputs:
         action: 'deploy'
         connectionType: 'azureResourceManager'
-        azureSubscriptionConnection: 'Azure subscription 1(09596d8b-933e-4093-a627-78cef0237f46)'
+        azureSubscriptionConnection: ''
         azureResourceGroup: 'my_resource'
         kubernetesCluster: 'AKS-SPG-BOOT'
         namespace: 'new-spg'

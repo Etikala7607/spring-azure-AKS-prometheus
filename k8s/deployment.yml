@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spg-boot
+spec:
+  replicas: 3  # Set the number of desired replicas
+  selector:
+    matchLabels:
+      app: spg-boot
+  template:
+    metadata:
+      labels:
+        app: spg-boot
+    spec:
+      containers:
+      - name: spg-boot
+        image: dockeravan/spg-boot:latest  # Update with your ACR details and image name
+        ports:
+        - containerPort: 8080  # Update with your container port

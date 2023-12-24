@@ -29,7 +29,6 @@ stages:
         KeyVaultName: $(keyVaultName)
         SecretsFilter: '*'
         RunAsPreJob: false
-    steps:
     - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml'

@@ -11,8 +11,8 @@ resources:
 variables:
   tag: '$(Build.BuildId)'
   imageName: 'dockeravan/spg-boot'
-  azureSubscriptionEndpoint: 'https://spgaks.vault.azure.net/'
-  keyVaultName: 'SpgAKS'
+  azureSubscriptionEndpoint: 'https://akskeyvalt.vault.azure.net/'
+  keyVaultName: 'azuredevopsspg'
 
 stages:
 - stage: Build

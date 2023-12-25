@@ -25,7 +25,7 @@ stages:
     steps:
     - task: AzureKeyVault@2
       inputs:
-        azureSubscriptionEndpoint: $(Azure-keyvault)
+        azureSubscriptionEndpoint: $(azureSubscriptionEndpoint)
         KeyVaultName: $(keyVaultName)
         SecretsFilter: '*'
         RunAsPreJob: false

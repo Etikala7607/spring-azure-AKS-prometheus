@@ -9,10 +9,12 @@ resources:
 - repo: self
 
 variables:
-- group: CommonVars # This is the correct syntax for linking a variable group
-- group: SecretVars # This is the correct syntax for linking a variable group
-  tag: '$(Build.BuildId)'
-  imageName: 'dockeravan/spg-boot'
+- group: CommonVars # Link to the CommonVars variable group
+- group: SecretVars # Link to the SecretVars variable group
+- name: tag
+  value: '$(Build.BuildId)'
+- name: imageName
+  value: 'dockeravan/spg-boot''
 
 stages:
 - stage: Build

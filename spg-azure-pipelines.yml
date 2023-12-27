@@ -11,6 +11,8 @@ resources:
 variables:
   tag: '$(Build.BuildId)'
   imageName: 'dockeravan/spg-boot'
+  - group: CommonVars # commons
+  - group: SecretVars
 
 stages:
 - stage: Build
@@ -22,9 +24,6 @@ stages:
       vmImage: ubuntu-latest
     steps:
     - checkout: self
-
-    - group: CommonVars # commons
-    - group: SecretVars
 
     - task: Maven@4
       inputs:

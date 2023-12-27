@@ -22,6 +22,7 @@ stages:
       vmImage: ubuntu-latest
     steps:
     - task: Maven@4
+      displayName: Use maven
       inputs:
         mavenPomFile: 'pom.xml'
         goals: 'install'

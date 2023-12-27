@@ -23,7 +23,7 @@ stages:
     steps:
     - checkout: self
 
-    - group: CommonVars # commons
+    - group: CommonVars 
     - group: SecretVars
 
     - task: Maven@4

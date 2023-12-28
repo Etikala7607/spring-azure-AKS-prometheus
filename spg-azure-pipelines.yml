@@ -61,7 +61,6 @@ stages:
       inputs:
         action: 'deploy'
         connectionType: 'azureResourceManager'
-        azureSubscriptionConnection: $(AzureSubscriptionId)
         azureSubscriptionEndpoint: $(AzureSubscriptionEndpoint)
         azureResourceGroup: $(ResourceGroupName)
         kubernetesCluster: $(KubernetesClusterName)

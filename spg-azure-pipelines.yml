@@ -11,10 +11,10 @@ resources:
 variables:
 - group: CommonVars # Link to the CommonVars variable group
 - group: SecretVars # Link to the SecretVars variable group
-- name: tag
+  name: tag
   value: '$(Build.BuildId)'
 - name: imageName
-  value: 'dockeravan/spg-boot''
+  value: 'dockeravan/spg-boot'
 
 stages:
 - stage: Build
@@ -29,7 +29,7 @@ stages:
 
     - task: Maven@4
       inputs:
-        mavenPomFile: 'pom.xml'
+        mavenPomFile: 'Pom'
         goals: 'install'
         publishJUnitResults: true
         testResultsFiles: '**/surefire-reports/TEST-*.xml'

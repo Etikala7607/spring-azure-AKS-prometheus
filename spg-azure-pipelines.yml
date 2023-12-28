@@ -62,6 +62,7 @@ stages:
         action: 'deploy'
         connectionType: 'azureResourceManager'
         azureSubscriptionConnection: $(AzureSubscriptionId)
+        azureSubscriptionEndpoint: $(AzureSubscriptionEndpoint)
         azureResourceGroup: $(ResourceGroupName)
         kubernetesCluster: $(KubernetesClusterName)
         namespace: 'new-spg'

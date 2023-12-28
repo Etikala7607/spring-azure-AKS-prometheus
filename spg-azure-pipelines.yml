@@ -11,7 +11,7 @@ resources:
 variables:
 - group: CommonVars # Link to the CommonVars variable group
 - group: SecretVars # Link to the SecretVars variable group
-  name: tag
+- name: tag
   value: '$(Build.BuildId)'
 - name: imageName
   value: 'dockeravan/spg-boot'
